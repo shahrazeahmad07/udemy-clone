@@ -5,4 +5,7 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="already_a_user_login_here">Already a User? Login Here</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account. Register here.</string>
+    <string name="logout">Logout</string>
 </resources>
