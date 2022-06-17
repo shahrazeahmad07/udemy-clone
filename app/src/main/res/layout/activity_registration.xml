@@ -20,6 +20,7 @@
         app:hintTextColor="@android:color/darker_gray">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:autofillHints="false"
