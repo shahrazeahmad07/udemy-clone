@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Udemy Clone</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="already_a_user_login_here">Already a User? Login Here</string>
 </resources>
