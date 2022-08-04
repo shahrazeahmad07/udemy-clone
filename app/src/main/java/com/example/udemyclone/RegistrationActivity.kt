@@ -28,7 +28,7 @@ class RegistrationActivity : AppCompatActivity() {
             val password = binding.etPassword.text.toString()
             val confirmPassword = binding.etConfirmPassword.text.toString()
 
-            if (username.isEmpty() && password.isEmpty() && confirmPassword.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Required fields empty..", Toast.LENGTH_SHORT).show()
             }
             else if (password != confirmPassword) {

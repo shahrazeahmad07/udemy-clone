@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             val username = binding.etUsername.text.toString()
             val password = binding.etPassword.text.toString()
-            if (username.isEmpty() && password.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Required fields empty..", Toast.LENGTH_SHORT).show()
             }
             else {
