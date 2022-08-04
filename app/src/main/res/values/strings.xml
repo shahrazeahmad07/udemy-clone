@@ -8,4 +8,11 @@
     <string name="login">Login</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account. Register here.</string>
     <string name="logout">Logout</string>
+    <string name="enter_course_name">Enter Course Name</string>
+    <string name="enter_course_price">Enter Course Price</string>
+    <string name="course_suited_for">Course Suited for</string>
+    <string name="course_image_link">Course Image Link</string>
+    <string name="enter_course_link">Enter Course Link</string>
+    <string name="course_description">Course Description</string>
+    <string name="add_course">Add Course</string>
 </resources>

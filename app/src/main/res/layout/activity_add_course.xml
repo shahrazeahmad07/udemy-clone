@@ -1,8 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCourseActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".AddCourseActivity"
+    android:background="@color/blueShade1">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:hint="@string/enter_course_name"
+                android:textColorHint="@android:color/darker_gray"
+                app:hintTextColor="@android:color/darker_gray">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCourseName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints="false"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:hint="@string/enter_course_price"
+                android:textColorHint="@android:color/darker_gray"
+                app:hintTextColor="@android:color/darker_gray"
+                android:layout_marginTop="20dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCoursePrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints="false"
+                    android:inputType="number"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:hint="@string/course_suited_for"
+                android:textColorHint="@android:color/darker_gray"
+                app:hintTextColor="@android:color/darker_gray"
+                android:layout_marginTop="20dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCourseSuitedFor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints="false"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:hint="@string/course_image_link"
+                android:textColorHint="@android:color/darker_gray"
+                app:hintTextColor="@android:color/darker_gray"
+                android:layout_marginTop="20dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCourseImageLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints="false"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextInputLayout"
+                android:hint="@string/enter_course_link"
+                android:textColorHint="@android:color/darker_gray"
+                app:hintTextColor="@android:color/darker_gray"
+                android:layout_marginTop="20dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCourseLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints="false"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                style="@style/TextInputLayout"
+                android:hint="@string/course_description"
+                android:textColorHint="@android:color/darker_gray"
+                app:hintTextColor="@android:color/darker_gray"
+                android:layout_marginTop="20dp">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCourseDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:autofillHints="false"
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="top"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnAddCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_button_background"
+                android:text="@string/add_course"
+                android:textAllCaps="false"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+</ScrollView>
