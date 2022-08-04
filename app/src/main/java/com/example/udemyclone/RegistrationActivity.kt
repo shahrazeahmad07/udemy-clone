@@ -17,6 +17,8 @@ class RegistrationActivity : AppCompatActivity() {
         binding = ActivityRegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Register"
+
         //! Already a user Functionality
         binding.tvLoginHere.setOnClickListener {
             finish()

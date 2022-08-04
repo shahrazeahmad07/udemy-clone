@@ -19,6 +19,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = "Login"
+
         mAuth = FirebaseAuth.getInstance()
 
         //! Register here
@@ -55,6 +57,7 @@ class LoginActivity : AppCompatActivity() {
         val user = mAuth.currentUser
         if (user != null) {
             startActivity(Intent(this,MainActivity::class.java))
+            //startActivity(Intent(this,AddCourseActivity::class.java))
             finish()
         }
     }

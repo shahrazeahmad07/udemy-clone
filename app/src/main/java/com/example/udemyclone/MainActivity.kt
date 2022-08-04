@@ -21,6 +21,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         //! Firebase Auth
         mAuth = FirebaseAuth.getInstance()
+
+
+        //! Add Course Button
+        binding.btnAddCourse.setOnClickListener {
+            startActivity(Intent(this, AddCourseActivity::class.java))
+        }
     }
 
     //! Menu creation
