@@ -6,12 +6,19 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.udemyclone.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAuth: FirebaseAuth
+
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var courseRVModalArrayList: ArrayList<CourseRVModal>
+    private lateinit var courseRVAdapter: CourseRVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,14 +26,52 @@ class MainActivity : AppCompatActivity() {
         //! binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         //! Firebase Auth
         mAuth = FirebaseAuth.getInstance()
-
+        firebaseDatabase = FirebaseDatabase.getInstance()
+        databaseReference = firebaseDatabase.getReference("Courses")
 
         //! Add Course Button
         binding.btnAddCourse.setOnClickListener {
             startActivity(Intent(this, AddCourseActivity::class.java))
         }
+
+        //! courseRV Array List.
+        courseRVModalArrayList = ArrayList()
+
+        //! recyclerView
+        binding.rvCourses.layoutManager = LinearLayoutManager(this)
+        courseRVAdapter = CourseRVAdapter(courseRVModalArrayList, this)
+        binding.rvCourses.adapter = courseRVAdapter
+        getAllCourses()
+    }
+
+    private fun getAllCourses() {
+        courseRVModalArrayList.clear()
+        databaseReference.addChildEventListener(object: ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                //courseRVModalArrayList.add(snapshot.getValue(CourseRVModal::class.java))
+                snapshot.getValue(CourseRVModal::class.java)?.let { courseRVModalArrayList.add(it) }
+                courseRVAdapter.notifyDataSetChanged()
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                courseRVAdapter.notifyDataSetChanged()
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                courseRVAdapter.notifyDataSetChanged()
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                courseRVAdapter.notifyDataSetChanged()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     //! Menu creation
@@ -39,7 +84,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         if (id == R.id.mLogout) {
-            Toast.makeText(this,"Logged Out!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Logged Out!", Toast.LENGTH_SHORT).show()
             mAuth.signOut()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
