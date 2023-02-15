@@ -26,5 +26,11 @@
         app:borderWidth="0dp"
         app:tint="@color/white" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminateTint="@color/blueShade2"/>
 
 </RelativeLayout>

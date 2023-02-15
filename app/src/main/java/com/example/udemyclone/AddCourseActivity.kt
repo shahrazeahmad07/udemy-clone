@@ -51,7 +51,6 @@ class AddCourseActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-
                 })
             }
         }

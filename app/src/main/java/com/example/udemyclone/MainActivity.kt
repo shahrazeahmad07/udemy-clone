@@ -5,13 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.udemyclone.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CourseRVAdapter.CourseClickInterface{
     private lateinit var binding: ActivityMainBinding
     private lateinit var mAuth: FirebaseAuth
 
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 
         //! recyclerView
         binding.rvCourses.layoutManager = LinearLayoutManager(this)
-        courseRVAdapter = CourseRVAdapter(courseRVModalArrayList, this)
+        courseRVAdapter = CourseRVAdapter(courseRVModalArrayList, this, this)
         binding.rvCourses.adapter = courseRVAdapter
         getAllCourses()
     }
@@ -54,6 +55,7 @@ class MainActivity : AppCompatActivity() {
                 //courseRVModalArrayList.add(snapshot.getValue(CourseRVModal::class.java))
                 snapshot.getValue(CourseRVModal::class.java)?.let { courseRVModalArrayList.add(it) }
                 courseRVAdapter.notifyDataSetChanged()
+                binding.progressBar.visibility = View.GONE
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -69,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(baseContext, error.message, Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -90,5 +93,11 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCourseClick(position: Int) {
+        val intent = Intent(this, CourseDetails::class.java)
+        intent.putExtra("Course Name", courseRVModalArrayList[position].courseName)
+        startActivity(intent)
     }
 }

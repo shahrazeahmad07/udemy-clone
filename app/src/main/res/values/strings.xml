@@ -17,4 +17,7 @@
     <string name="add_course">Add Course</string>
     <string name="add_icon">add icon</string>
     <string name="course_image">Course Image</string>
+    <string name="course_hero_image">Course Hero Image</string>
+    <string name="edit_course">Edit Course</string>
+    <string name="delete_course">Delete Course</string>
 </resources>

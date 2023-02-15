@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class CourseRVAdapter(private val courseRVModalArrayList: ArrayList<CourseRVModal>, val context: Context) : RecyclerView.Adapter<CourseRVAdapter.ViewHolder>() {
+class CourseRVAdapter(private val courseRVModalArrayList: ArrayList<CourseRVModal>, val context: Context, val courseClickInterface: CourseClickInterface) : RecyclerView.Adapter<CourseRVAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,6 +21,9 @@ class CourseRVAdapter(private val courseRVModalArrayList: ArrayList<CourseRVModa
         holder.tvCourseTitle.text = courseRVModalArrayList[position].courseName
         holder.tvCoursePrice.text = courseRVModalArrayList[position].coursePrice.toString()
         Picasso.get().load(courseRVModalArrayList[position].courseImageLink).into(holder.ivCourseImage)
+        holder.itemView.setOnClickListener {
+            courseClickInterface.onCourseClick(position)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -37,5 +40,8 @@ class CourseRVAdapter(private val courseRVModalArrayList: ArrayList<CourseRVModa
             tvCourseTitle = itemView.findViewById(R.id.tvCourseTitle)
             tvCoursePrice = itemView.findViewById(R.id.tvCoursePrice)
         }
+    }
+    interface CourseClickInterface {
+        fun onCourseClick(position: Int)
     }
 }
