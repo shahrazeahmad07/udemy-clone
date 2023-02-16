@@ -99,5 +99,6 @@ class MainActivity : AppCompatActivity(), CourseRVAdapter.CourseClickInterface{
         val intent = Intent(this, CourseDetails::class.java)
         intent.putExtra("Course Name", courseRVModalArrayList[position].courseName)
         startActivity(intent)
+        finish()
     }
 }

@@ -3,7 +3,6 @@ package com.example.udemyclone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.example.udemyclone.databinding.ActivityCourseDetailsBinding
 import com.google.firebase.database.*
@@ -43,5 +42,25 @@ class CourseDetails : AppCompatActivity() {
                 Toast.makeText(baseContext, error.message, Toast.LENGTH_SHORT).show()
             }
         })
+
+        binding.btnEditCourse.setOnClickListener {
+            val intent = Intent(this, EditCourseActivity::class.java)
+            intent.putExtra("Course Name", intent.getStringExtra("Course Name").toString())
+            startActivity(intent)
+        }
+
+        //! remaining
+        binding.btnDeleteCourse.setOnClickListener {
+            databaseReference.removeValue()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }
