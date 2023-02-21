@@ -15,13 +15,17 @@ class CourseDetails : AppCompatActivity() {
     lateinit var databaseReference: DatabaseReference
     lateinit var course: CourseRVModal
 
+    lateinit var courseID: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCourseDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        courseID = intent.getStringExtra("CourseID").toString()
+
         firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.getReference("Courses").child(intent.getStringExtra("Course Name").toString())
+        databaseReference = firebaseDatabase.getReference("Courses").child(courseID)
 
         databaseReference.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -45,8 +49,9 @@ class CourseDetails : AppCompatActivity() {
 
         binding.btnEditCourse.setOnClickListener {
             val intent = Intent(this, EditCourseActivity::class.java)
-            intent.putExtra("Course Name", intent.getStringExtra("Course Name").toString())
+            intent.putExtra("CourseID", courseID)
             startActivity(intent)
+            finish()
         }
 
         //! remaining

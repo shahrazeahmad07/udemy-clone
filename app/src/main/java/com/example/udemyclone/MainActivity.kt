@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), CourseRVAdapter.CourseClickInterface{
 
     override fun onCourseClick(position: Int) {
         val intent = Intent(this, CourseDetails::class.java)
-        intent.putExtra("Course Name", courseRVModalArrayList[position].courseName)
+        intent.putExtra("CourseID", courseRVModalArrayList[position].courseName)
         startActivity(intent)
         finish()
     }

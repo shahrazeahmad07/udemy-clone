@@ -20,4 +20,6 @@
     <string name="course_hero_image">Course Hero Image</string>
     <string name="edit_course">Edit Course</string>
     <string name="delete_course">Delete Course</string>
+    <string name="cancel">Cancel</string>
+    <string name="update">Update</string>
 </resources>
