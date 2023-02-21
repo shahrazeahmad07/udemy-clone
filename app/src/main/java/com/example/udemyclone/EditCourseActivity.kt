@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import com.example.udemyclone.databinding.ActivityEditCourseBinding
 import com.google.firebase.database.*
@@ -50,7 +51,7 @@ class EditCourseActivity : AppCompatActivity() {
             if (courseName.isEmpty() || coursePrice.isEmpty() || courseSuitedFor.isEmpty() || courseImageLink.isEmpty() || courseLink.isEmpty() || courseDescription.isEmpty()) {
                 Toast.makeText(this, "Enter all fields first!!", Toast.LENGTH_SHORT).show()
             } else {
-
+                binding.progressBar.visibility = View.VISIBLE
                 databaseReference.removeValue()
 
                 val course = CourseRVModal(
@@ -63,7 +64,7 @@ class EditCourseActivity : AppCompatActivity() {
                 )
                 databaseReference = firebaseDatabase.getReference("Courses").child(courseName)
                 Handler(Looper.getMainLooper()).postDelayed({
-                                                            addCourse(course)
+                    databaseReference.setValue(course)
                     val intent = Intent(this, CourseDetails::class.java)
                     intent.putExtra("CourseID", course.courseName)
                     startActivity(intent)
@@ -71,20 +72,6 @@ class EditCourseActivity : AppCompatActivity() {
                 }, 3000)
             }
         }
-    }
-
-    private fun addCourse(course: CourseRVModal) {
-        databaseReference.addValueEventListener(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                databaseReference.setValue(course)
-                Toast.makeText(this@EditCourseActivity, "Course Updated", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@EditCourseActivity, error.message, Toast.LENGTH_SHORT).show()
-            }
-
-        })
     }
 
     private fun fetchCourseDetails() {
