@@ -29,7 +29,7 @@ class CourseDetails : AppCompatActivity() {
         firebaseDatabase = Firebase.database
         databaseReference = firebaseDatabase.getReference("Courses").child(courseID)
 
-        databaseReference.addValueEventListener(object: ValueEventListener{
+        databaseReference.addListenerForSingleValueEvent(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.getValue(CourseRVModal::class.java)?.let {
                     course = it

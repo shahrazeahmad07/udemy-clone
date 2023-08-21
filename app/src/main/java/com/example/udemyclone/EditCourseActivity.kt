@@ -3,8 +3,6 @@ package com.example.udemyclone
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import com.example.udemyclone.databinding.ActivityEditCourseBinding
@@ -64,13 +62,24 @@ class EditCourseActivity : AppCompatActivity() {
                     courseDescription
                 )
                 databaseReference = firebaseDatabase.getReference("Courses").child(courseName)
-                Handler(Looper.getMainLooper()).postDelayed({
-                    databaseReference.setValue(course)
-                    val intent = Intent(this, CourseDetails::class.java)
-                    intent.putExtra("CourseID", course.courseName)
-                    startActivity(intent)
-                    finish()
-                }, 3000)
+                databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        databaseReference.setValue(course)
+                        val intent = Intent(this@EditCourseActivity, CourseDetails::class.java)
+                        intent.putExtra("CourseID", course.courseName)
+                        startActivity(intent)
+                        finish()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(
+                            this@EditCourseActivity,
+                            error.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+
+                })
             }
         }
     }

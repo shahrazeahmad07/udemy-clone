@@ -38,7 +38,7 @@ class AddCourseActivity : AppCompatActivity() {
             else {
                 val courseRVModal = CourseRVModal(courseName, coursePrice.toDouble(), courseSuitedFor, courseImageLink, courseLink, courseDescription)
 
-                databaseReference.addValueEventListener(object: ValueEventListener {
+                databaseReference.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         databaseReference.child(courseName).setValue(courseRVModal)
                         Toast.makeText(this@AddCourseActivity, "Course Added!!!", Toast.LENGTH_SHORT)
@@ -53,7 +53,24 @@ class AddCourseActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
                 })
+//                databaseReference.addValueEventListener(object: ValueEventListener {
+//                    override fun onDataChange(snapshot: DataSnapshot) {
+//                        databaseReference.child(courseName).setValue(courseRVModal)
+//                        Toast.makeText(this@AddCourseActivity, "Course Added!!!", Toast.LENGTH_SHORT)
+//                            .show()
+//                        finish()
+//                    }
+//
+//                    override fun onCancelled(error: DatabaseError) {
+//                        Toast.makeText(
+//                            this@AddCourseActivity,
+//                            "Error: $error",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                })
             }
         }
     }
