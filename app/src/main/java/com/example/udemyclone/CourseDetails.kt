@@ -6,16 +6,18 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.udemyclone.databinding.ActivityCourseDetailsBinding
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 
 class CourseDetails : AppCompatActivity() {
     lateinit var binding: ActivityCourseDetailsBinding
 
     private lateinit var firebaseDatabase: FirebaseDatabase
-    lateinit var databaseReference: DatabaseReference
-    lateinit var course: CourseRVModal
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var course: CourseRVModal
 
-    lateinit var courseID: String
+    private lateinit var courseID: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +26,7 @@ class CourseDetails : AppCompatActivity() {
 
         courseID = intent.getStringExtra("CourseID").toString()
 
-        firebaseDatabase = FirebaseDatabase.getInstance()
+        firebaseDatabase = Firebase.database
         databaseReference = firebaseDatabase.getReference("Courses").child(courseID)
 
         databaseReference.addValueEventListener(object: ValueEventListener{

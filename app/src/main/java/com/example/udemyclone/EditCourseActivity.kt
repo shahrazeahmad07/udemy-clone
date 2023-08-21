@@ -9,16 +9,17 @@ import android.view.View
 import android.widget.Toast
 import com.example.udemyclone.databinding.ActivityEditCourseBinding
 import com.google.firebase.database.*
-import java.util.Objects
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class EditCourseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditCourseBinding
 
     private lateinit var courseID: String
 
-    lateinit var firebaseDatabase: FirebaseDatabase
-    lateinit var databaseReference: DatabaseReference
-    lateinit var course: CourseRVModal
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var course: CourseRVModal
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditCourseBinding.inflate(layoutInflater)
@@ -26,7 +27,7 @@ class EditCourseActivity : AppCompatActivity() {
 
         courseID = intent.getStringExtra("CourseID").toString()
 
-        firebaseDatabase = FirebaseDatabase.getInstance()
+        firebaseDatabase = Firebase.database
         databaseReference = firebaseDatabase.getReference("Courses").child(courseID)
 
 

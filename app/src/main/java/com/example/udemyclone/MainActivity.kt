@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.udemyclone.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity(), CourseRVAdapter.CourseClickInterface{
     private lateinit var binding: ActivityMainBinding
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity(), CourseRVAdapter.CourseClickInterface{
 
         //! Firebase Auth
         mAuth = FirebaseAuth.getInstance()
-        firebaseDatabase = FirebaseDatabase.getInstance()
+        firebaseDatabase = Firebase.database
         databaseReference = firebaseDatabase.getReference("Courses")
 
         //! Add Course Button

@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.Toast
 import com.example.udemyclone.databinding.ActivityAddCourseBinding
 import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class AddCourseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddCourseBinding
@@ -19,7 +21,7 @@ class AddCourseActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Add Course"
 
-        firebaseDatabase = FirebaseDatabase.getInstance()
+        firebaseDatabase = Firebase.database
         databaseReference = firebaseDatabase.getReference("Courses")
         
         binding.btnAddCourse.setOnClickListener {
